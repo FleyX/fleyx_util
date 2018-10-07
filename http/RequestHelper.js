@@ -4,7 +4,7 @@ const fs = require('fs');
 const iconv = require('iconv-lite');
 
 class RequestHelper {
-    static GET(url, headers, charset='utf-8') {
+    static GET(url, headers, charset = 'utf-8') {
         var options = {
             method: 'GET',
             url: url,
@@ -25,13 +25,19 @@ class RequestHelper {
         })
     }
 
-    static POST(url, form, headers, charset = 'utf-8') {
+    static POST(url, form, type = "form", auth, headers, charset = 'utf-8') {
         var options = {
             method: 'POST',
             url: url,
-            form: form || null,
-            headers: headers || null
+            headers: headers || null,
+            auth: auth || null
         };
+        if (type == "form") {
+            options.form = form || null;
+        } else {
+            options.body = form;
+            options.json = true;
+        }
         return new Promise((resolve, reject) => {
             request(options)
                 .on('error', (err) => {
