@@ -3,21 +3,19 @@
 const mysql = require('mysql');
 const config = require('../config/config.js');
 
-var pool = mysql.createPool(config.mysql);
-pool.query('select 1', (err, res) => {
-    if (err) {
-        throw err;
-    }
-})
+var pool = null;
 
 let getConnection = () => {
+    if (pool == null) {
+        throw new Error("请先初始化mysql连接池");
+    }
     return new Promise((resolve, reject) => {
         pool.getConnection((error, conn) => {
-            if(error){
+            if (error) {
                 if (error.code == 'ECONNREFUSED') {
                     throw error;
                     return;
-                }else{
+                } else {
                     reject(error);
                     return;
                 }
@@ -28,6 +26,15 @@ let getConnection = () => {
 }
 
 class MysqlHelper {
+    static createPool() {
+        pool = mysql.createPool(config.mysql);
+        pool.query('select 1', (err, res) => {
+            if (err) {
+                throw err;
+            }
+        })
+    }
+
     //返回多条记录
     static async row(sql, ...params) {
         params = dealParams(params);
@@ -105,4 +112,3 @@ function dealParams(params) {
     }
 }
 module.exports = MysqlHelper;
-

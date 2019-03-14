@@ -1,0 +1,26 @@
+{
+  "name": "node_util_class",
+  "version": "1.0.0",
+  "description": "node.js工具类",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FleyX/node_util_class.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FleyX/node_util_class/issues"
+  },
+  "homepage": "https://github.com/FleyX/node_util_class#readme",
+  "dependencies": {
+    "@types/cheerio": "0.22.11",
+    "mysql": "2.16.0"
+  }
+}
