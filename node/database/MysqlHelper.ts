@@ -9,7 +9,7 @@ class MysqlHelper {
   static createPool(option: mysql.ConnectionConfig) {
     if (MysqlHelper.pool == null) {
       MysqlHelper.pool = mysql.createPool(option);
-      MysqlHelper.pool.query("select 1=1");
+      MysqlHelper.pool.query('select 1=1');
     }
   }
 
@@ -52,7 +52,7 @@ class MysqlHelper {
   //返回一条记录
   static async first(
     sql: string,
-    ...params: Array<object>
+    ...params: Array<any>
   ): Promise<object | null> {
     params = dealParams(params);
     let connection = await MysqlHelper.getConnection();
@@ -69,7 +69,7 @@ class MysqlHelper {
   }
 
   //返回单个数据
-  static async single(sql: string, ...params: Array<object>): Promise<any> {
+  static async single(sql: string, ...params: Array<any>): Promise<any> {
     params = dealParams(params);
     let connection = await MysqlHelper.getConnection();
     return new Promise(function(resolve, reject) {
@@ -89,7 +89,7 @@ class MysqlHelper {
   }
 
   //执行sql返回原生对象
-  static async execute(sql: string, ...params: Array<object>): Promise<any> {
+  static async execute(sql: string, ...params: Array<any>): Promise<any> {
     params = dealParams(params);
     let connection = await MysqlHelper.getConnection();
     return new Promise(function(resolve, reject) {

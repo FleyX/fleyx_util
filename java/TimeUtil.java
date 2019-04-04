@@ -1,0 +1,82 @@
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * 类功能简述：
+ * 类功能详述：
+ *
+ * @author fanxb
+ * @date 2019/3/28 16:54
+ */
+public class TimeUtil {
+
+    private static final DateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
+
+    /**
+     * Description: 格式化时间
+     *
+     * @param dateLong 毫秒时间戳
+     * @return java.lang.String
+     * @author fanxb
+     * @date 2019/3/28 17:10
+     */
+    public static String formatTime(Long dateLong) {
+        return formatTime(null, new Date(dateLong));
+    }
+
+    /**
+     * Description: 格式化时间
+     *
+     * @param pattern  pattern
+     * @param dateLong 毫秒时间戳
+     * @return java.lang.String
+     * @author fanxb
+     * @date 2019/3/28 17:11
+     */
+    public static String formatTime(String pattern, Long dateLong) {
+        Date date = new Date(dateLong);
+        if (pattern != null) {
+            return formatTime(pattern, date);
+        } else {
+            return formatTime(null, date);
+        }
+    }
+
+    /**
+     * Description: 格式化时间
+     *
+     * @param date 时间
+     * @return java.lang.String
+     * @author fanxb
+     * @date 2019/3/28 17:08
+     */
+    public static String formatTime(Date date) {
+        return formatTime(null, date);
+    }
+
+
+    /**
+     * description:格式化时间，日期
+     *
+     * @param pattern 格式化字符串
+     * @param date    时间
+     * @return java.lang.String
+     * @author fanxb
+     * @date 2019/3/28 16:58
+     */
+    public static String formatTime(String pattern, Date date) {
+        DateFormat format;
+        if (pattern == null) {
+            format = DEFAULT_DATE_FORMAT;
+        } else {
+            format = new SimpleDateFormat(pattern);
+        }
+        if (date == null) {
+            return format.format(new Date());
+        } else {
+            return format.format(date);
+        }
+    }
+}
