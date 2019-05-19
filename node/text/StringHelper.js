@@ -23,7 +23,7 @@ class StringHelper {
     static getRandomNumber(max, min) {
         var Range = max - min;
         var Rand = Math.random();
-        return (min + Math.round(Rand * Range));
+        return (min + Math.ceil(Rand * Range));
     }
 
     static isEmpty(str) {
